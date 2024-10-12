@@ -10,7 +10,7 @@ COPY . .
 
 RUN npm run build
 
-FROM nginx:alpine
+FROM nginx:latest
 
 COPY ./nginxConfigs/default.conf /etc/nginx/conf.d/default.conf
 

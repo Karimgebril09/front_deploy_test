@@ -1,24 +1,25 @@
 version: '3'
 services:
   front:
-      build: .
-      container_name: whisperFront
-      ports:
-          - "80:80"
-          - "443:443"
-      volumes:
-          - './certbot/data:/usr/share/nginx/html/letsencrypt'
-          - './certbot/conf:/etc/nginx/ssl'
-      networks:
-          - whisperNet
+    build: .
+    container_name: whisperFront
+    image: karimgebril/frontend_test:v1
+    ports:
+        - "80:80"
+        - "443:443"
+    volumes:
+        - './certbot/data:/usr/share/nginx/html/letsencrypt'
+        - './certbot/conf:/etc/nginx/ssl'
+    networks:
+        - whisperNet
 
   certbot:
-      image: certbot/certbot:latest
-      certbot: frontendCertbot
-      command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt -d Whisper.webredirect.org --agree-tos --email Grambell.whisper@gmail.com
-      volumes:
-          - './certbot/conf:/etc/letsencrypt'
-          - './certbot/data:/usr/share/nginx/html/letsencrypt'
+    image: certbot/certbot:latest
+    container_name: frontendCertbot 
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email Whisper.webredirect.org --agree-tos --no-eff-email -d Whisper.webredirect.org
+    volumes:
+        - './certbot/conf:/etc/letsencrypt'
+        - './certbot/data:/usr/share/nginx/html/letsencrypt'
 
 networks:
     whisperNet:
