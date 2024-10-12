@@ -16,7 +16,7 @@ services:
   certbot:
     image: certbot/certbot:latest
     container_name: frontendCertbot 
-    command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email Whisper.webredirect.org --agree-tos --no-eff-email -d Whisper.webredirect.org
+    command: certonly --webroot --webroot-path=/usr/share/nginx/html/letsencrypt --email grambell.whisper@gmail.com --agree-tos --no-eff-email -d Whisper.webredirect.org
     volumes:
         - './certbot/conf:/etc/letsencrypt'
         - './certbot/data:/usr/share/nginx/html/letsencrypt'
